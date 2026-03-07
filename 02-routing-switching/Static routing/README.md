@@ -9,6 +9,7 @@ Concepts Practiced:
   
 
 Commands Used:
+
 ip route {DST IP} {SUBNET MASK} {NEXT HOP ADDRESS}
 show ip route
 
