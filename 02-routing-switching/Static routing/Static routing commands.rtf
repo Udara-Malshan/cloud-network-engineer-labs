@@ -1,0 +1,87 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2868
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fswiss\fcharset0 Helvetica-Oblique;
+\f3\fswiss\fcharset0 Helvetica-BoldOblique;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww22500\viewh10880\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs36 \cf0 01. \ul Router pre-configurations - Interface assigning
+\f1\b0\fs24 \
+\ulnone \
+          R1#conf ter\
+          R1(config)#interface g0/0\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0           R1(config-if)#ip add 192.168.13.1 255.255.255.0\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0           R1(config-if)#no shutdown\
+\
+\
+
+\f2\i\fs28 Router\'92s all interfaces configure like above.
+\f1\i0\fs24 \
+\
+          R1#show ip interface brief  
+\f2\i - (show summary of the interface)
+\f1\i0 \
+\
+\
+
+\f0\b\fs36 02. \ul Define static route between PC1 & PC4
+\f1\b0\fs24 \ulnone \
+\
+
+\fs28 R1 router configurations,
+\fs24 \
+\
+         R1(config)#ip route 192.168.4.0 255.255.255.0 192.168.13.3\
+\
+         
+\f2\i Or\
+
+\f1\i0 \
+         R1(config)#ip route 192.168.4.0 255.255.255.0 g0/0.  
+\f2\i (Use R1\'92s exit interface)
+\f1\i0 \
+         \
+         R1(config)#show ip route\
+\
+
+\fs28 R3 router configurations,
+\fs24 \
+\
+       
+\f3\i\b  (PC1 to PC4)
+\f1\i0\b0 \
+\
+         R3(config)#ip route 192.168.4.0 255.255.255.0 192.168.34.4\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0        
+\f2\i   Or
+\f1\i0 \
+\
+         R3(config)#ip route 192.168.4.0 255.255.255.0 g0/1.  (Use R2\'92s exit interface)\
+        \
+\
+\
+  
+\f3\i\b   (PC4 to PC1)
+\f1\i0\b0 \
+\
+         R3(config)#ip route 192.168.1.0 255.255.255.0 192.168.13.1\
+\
+        
+\f2\i  Or\
+
+\f1\i0 \
+         R3(config)#ip route 192.168.1.0 255.255.255.0 g0/0.  (Use R2\'92s exit interface)\
+         \
+         R3(config)#show ip route\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0  \
+     \
+\
+\
+\
+ }
