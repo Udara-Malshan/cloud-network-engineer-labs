@@ -1,0 +1,63 @@
+Step 01,
+    
+    Configure Hostnames
+    All routers interface pre configuration (default gateway address etc..)
+
+Step 02
+    Trunk configurations in SW1 
+
+      sw1(config)#interface g0/1
+      sw1(config-if)#switchport trunk encapsulation dot1q
+      sw1(config-if)#switchport mode trunk   
+      sw1(config-if)#switchport trunk allowed van 10,30
+      sw1(config-if)#switchport trunk native plan 1001
+
+      sw1(config-if)#do show interfaces trunk 
+
+    Trunk configurations in SW2
+
+      sw2(config)#interface g0/1
+      sw2(config-if)#switchport trunk encapsulation dor1q
+      sw2(config-if)#switchport mode trunk
+      sw2(config-if)#switchport trunk allowed van 10,30
+      sw2(config-if)#switchport trunk native plan 1001
+
+      sw2(config-if)#do show vlan brief
+
+SW1 to SW2 trunk connection done.
+
+
+   Trunk connection between SW@ ro router
+     
+     sw2(config)#interface g0/2
+     sw2(config-if)#switchport trunk encapsulation dor1q
+     sw2(config-if)#switchport mode trunk
+     sw2(config-if)#switchport trunk allowed van 10,20,30
+     sw2(config-if)#switchport trunk native plan 1001
+     sw2(config-if)#do show interface trunk
+
+
+       
+Step 03
+    Configure Router  (ROAS-Router on a stick)
+
+  Here we create sub-interface from interface g0/0 for 3 vlans.
+
+     R1(config)#interface g0/0
+     R1(config-if)#no shutdown
+
+     R1(config-if)#interface g0/0.10
+     R1(config-if)#encapsulation dot1q
+     R1(config-if)#ip address 192.168.1.1 255.255.255.192
+
+     R1(config-if)#interface g0/0.20
+     R1(config-if)#encapsulation dot1q
+     R1(config-if)#ip address 192.168.1.65 255.255.255.192
+
+     R1(config-if)#interface g0/0.30
+     R1(config-if)#encapsulation dot1q
+     R1(config-if)#ip address 192.168.1.129 255.255.255.192
+
+
+     R1(config-if)#do show ip interface brief
+     R1#show ip route
