@@ -1,0 +1,48 @@
+Step 01,
+    
+    Configure Hostnames
+    All routers interface pre configuration (default gateway address etc..)
+
+Step 02
+    In here I didn't use trunk ports for this lab.It use in future labs.
+
+      R1(config)#interface g0/0
+      R1(config-if)#ip add 192.168.1.1 255.255.255.192
+      R1(config-if)#no shutdown
+
+      R1(config)#interface g0/1
+      R1(config-if)#ip add 192.168.1.65 255.255.255.192
+      R1(config-if)#no shutdown
+
+      R1(config)#interface g0/2
+      R1(config-if)#ip add 192.168.1.129 255.255.255.192
+      R1(config-if)#no shutdown
+   
+      R1(config-if)#do show ip interface brief
+        
+Step 03
+    Configure switch
+
+     sw1(config)#interface range f0/1-3,f0/9
+     sw1(config-if-range)#switchport mode access
+     sw1(config-if-range)#switchport access vlan 10
+
+     sw1(config)#interface range f0/4-5,f0/10
+     sw1(config-if-range)#switchport mode access
+     sw1(config-if-range)#switchport access vlan 20
+
+     sw1(config)#interface range f0/6-8,f0/11
+     sw1(config-if-range)#switchport mode access
+     sw1(config-if-range)#switchport access vlan 30
+
+     sw1(config)#do show plan brief
+
+     sw1(config)#vlan 10
+     sw1(config)#name Engineering
+
+     sw1(config)#vlan 20
+     sw1(config)#name HR
+
+     sw1(config)#vlan 30
+     sw1(config)#name Sales
+
