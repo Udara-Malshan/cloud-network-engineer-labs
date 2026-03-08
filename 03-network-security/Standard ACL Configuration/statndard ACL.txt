@@ -1,0 +1,10 @@
+# Configure OSPF on R1 and R2 to allow full connectivity between the PCs and servers.
+﻿﻿﻿
+# Configure standard numbered ACLS on R1 and standard named ACLs on R2
+to fulfill the following network policies:
+
+
+﻿Only PC1 and PC3 can access 192.168.1.0/24
+﻿Hosts in 172.16.2.0/24 can't access 192.168.2.0/24
+﻿172.16.1.0/24 can't access 172.16.2.0/24
+﻿172.16.2.0/24 can't access 172.16.1.0/24 
